@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head th:replace="~{fragments/header :: head('技能详情 - 技能管理系统')}"></head>
+<body class="d-flex flex-column min-vh-100">
+    <nav th:replace="~{fragments/navigation :: navigation}"></nav>
+    
+    <main class="flex-shrink-0">
+        <div class="container mt-4">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <!-- Alert Messages -->
+                    <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="bi bi-check-circle-fill"></i> <span th:text="${successMessage}"></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    
+                    <div class="card shadow">
+                        <div class="card-header bg-primary text-white">
+                            <h4 class="mb-0"><i class="bi bi-eye-fill"></i> 技能详情</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <h2 class="mb-3">
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                        <span th:text="${skill.name}">技能名称</span>
+                                    </h2>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <strong><i class="bi bi-tag-fill"></i> 分类：</strong>
+                                    <span class="badge bg-secondary fs-6" th:text="${skill.category}">分类</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <strong><i class="bi bi-graph-up"></i> 熟练度：</strong>
+                                    <span class="badge fs-6" 
+                                          th:classappend="${skill.proficiencyLevel.name() == 'BEGINNER' ? 'bg-info' : 
+                                                           skill.proficiencyLevel.name() == 'INTERMEDIATE' ? 'bg-primary' :
+                                                           skill.proficiencyLevel.name() == 'ADVANCED' ? 'bg-success' : 'bg-danger'}"
+                                          th:text="${skill.proficiencyLevel.displayName}">熟练度</span>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <strong><i class="bi bi-clock-history"></i> 经验年限：</strong>
+                                    <span th:text="${skill.yearsOfExperience}">0</span> 年
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <strong><i class="bi bi-file-text"></i> 描述：</strong>
+                                    <p class="mt-2" th:text="${skill.description != null && !skill.description.isEmpty()} ? ${skill.description} : '暂无描述'">描述</p>
+                                </div>
+                            </div>
+                            
+                            <hr>
+                            
+                            <div class="row mb-3 text-muted">
+                                <div class="col-md-6">
+                                    <small>
+                                        <i class="bi bi-calendar-plus"></i> 创建时间：
+                                        <span th:text="${#temporals.format(skill.createdAt, 'yyyy-MM-dd HH:mm:ss')}">创建时间</span>
+                                    </small>
+                                </div>
+                                <div class="col-md-6">
+                                    <small>
+                                        <i class="bi bi-calendar-check"></i> 更新时间：
+                                        <span th:text="${#temporals.format(skill.updatedAt, 'yyyy-MM-dd HH:mm:ss')}">更新时间</span>
+                                    </small>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a th:href="@{/skills}" class="btn btn-secondary">
+                                    <i class="bi bi-arrow-left"></i> 返回列表
+                                </a>
+                                <a th:href="@{/skills/{id}/edit(id=${skill.id})}" class="btn btn-warning">
+                                    <i class="bi bi-pencil"></i> 编辑
+                                </a>
+                                <form th:action="@{/skills/{id}/delete(id=${skill.id})}" method="post" 
+                                      onsubmit="return confirm('确定要删除这个技能吗？删除后将无法恢复！');" class="d-inline">
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="bi bi-trash"></i> 删除
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head th:replace="~{fragments/header :: head('首页 - 技能管理系统')}"></head>
+<body class="d-flex flex-column min-vh-100">
+    <nav th:replace="~{fragments/navigation :: navigation}"></nav>
+    
+    <main class="flex-shrink-0">
+        <div class="container mt-5">
+            <!-- Hero Section -->
+            <div class="jumbotron bg-light p-5 rounded-3 mb-4">
+                <h1 class="display-4">
+                    <i class="bi bi-mortarboard-fill text-primary"></i> 
+                    欢迎使用技能管理系统
+                </h1>
+                <p class="lead">一个基于 Spring Boot + Thymeleaf 构建的完整技能管理解决方案</p>
+                <hr class="my-4">
+                <p>轻松管理您的技能清单，记录学习进度，追踪职业发展。</p>
+                <div class="d-grid gap-2 d-md-flex">
+                    <a class="btn btn-primary btn-lg" th:href="@{/skills}" role="button">
+                        <i class="bi bi-list-ul"></i> 查看技能列表
+                    </a>
+                    <a class="btn btn-success btn-lg" th:href="@{/skills/new}" role="button">
+                        <i class="bi bi-plus-circle-fill"></i> 添加新技能
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Features Section -->
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="bi bi-plus-circle display-4 text-success"></i>
+                            <h5 class="card-title mt-3">创建技能</h5>
+                            <p class="card-text">添加新的技能，包括名称、描述、分类和熟练度等级。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="bi bi-search display-4 text-info"></i>
+                            <h5 class="card-title mt-3">搜索与筛选</h5>
+                            <p class="card-text">通过关键字搜索和分类筛选，快速找到您需要的技能。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <i class="bi bi-pencil-square display-4 text-warning"></i>
+                            <h5 class="card-title mt-3">编辑与管理</h5>
+                            <p class="card-text">轻松更新技能信息，追踪您的学习进度和经验积累。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tech Stack Section -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="bi bi-gear-fill"></i> 技术栈</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6><i class="bi bi-server"></i> 后端技术</h6>
+                                    <ul>
+                                        <li>Spring Boot 3.x</li>
+                                        <li>Spring Data JPA</li>
+                                        <li>H2 Database</li>
+                                        <li>Bean Validation</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6><i class="bi bi-palette-fill"></i> 前端技术</h6>
+                                    <ul>
+                                        <li>Thymeleaf 模板引擎</li>
+                                        <li>Bootstrap 5</li>
+                                        <li>Bootstrap Icons</li>
+                                        <li>响应式设计</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

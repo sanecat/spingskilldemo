@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head th:replace="~{fragments/header :: head('添加技能 - 技能管理系统')}"></head>
+<body class="d-flex flex-column min-vh-100">
+    <nav th:replace="~{fragments/navigation :: navigation}"></nav>
+    
+    <main class="flex-shrink-0">
+        <div class="container mt-4">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card shadow">
+                        <div class="card-header bg-success text-white">
+                            <h4 class="mb-0"><i class="bi bi-plus-circle-fill"></i> 添加新技能</h4>
+                        </div>
+                        <div class="card-body">
+                            <form th:action="@{/skills}" th:object="${skill}" method="post">
+                                
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">技能名称 <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="name" th:field="*{name}"
+                                           th:classappend="${#fields.hasErrors('name')} ? 'is-invalid'" 
+                                           placeholder="例如: Java, Python, 项目管理">
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" 
+                                         th:errors="*{name}">Name error</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">描述</label>
+                                    <textarea class="form-control" id="description" th:field="*{description}" 
+                                              rows="3" 
+                                              th:classappend="${#fields.hasErrors('description')} ? 'is-invalid'"
+                                              placeholder="简要描述该技能..."></textarea>
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}" 
+                                         th:errors="*{description}">Description error</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="category" class="form-label">分类 <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="category" th:field="*{category}"
+                                           list="categoryList"
+                                           th:classappend="${#fields.hasErrors('category')} ? 'is-invalid'"
+                                           placeholder="例如: 编程语言, 框架, 工具, 数据库, 软技能">
+                                    <datalist id="categoryList">
+                                        <option th:each="cat : ${categories}" th:value="${cat}"></option>
+                                        <option value="编程语言"></option>
+                                        <option value="框架"></option>
+                                        <option value="工具"></option>
+                                        <option value="数据库"></option>
+                                        <option value="软技能"></option>
+                                    </datalist>
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('category')}" 
+                                         th:errors="*{category}">Category error</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="proficiencyLevel" class="form-label">熟练度等级 <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="proficiencyLevel" th:field="*{proficiencyLevel}"
+                                            th:classappend="${#fields.hasErrors('proficiencyLevel')} ? 'is-invalid'">
+                                        <option value="">请选择...</option>
+                                        <option th:each="level : ${proficiencyLevels}" 
+                                                th:value="${level}" 
+                                                th:text="${level.displayName}">Level</option>
+                                    </select>
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('proficiencyLevel')}" 
+                                         th:errors="*{proficiencyLevel}">Proficiency error</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="yearsOfExperience" class="form-label">经验年限 <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" id="yearsOfExperience" 
+                                           th:field="*{yearsOfExperience}" min="0" max="50"
+                                           th:classappend="${#fields.hasErrors('yearsOfExperience')} ? 'is-invalid'"
+                                           placeholder="0">
+                                    <div class="invalid-feedback" th:if="${#fields.hasErrors('yearsOfExperience')}" 
+                                         th:errors="*{yearsOfExperience}">Years error</div>
+                                </div>
+                                
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <a th:href="@{/skills}" class="btn btn-secondary">
+                                        <i class="bi bi-x-circle"></i> 取消
+                                    </a>
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="bi bi-check-circle"></i> 保存
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>
